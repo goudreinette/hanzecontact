@@ -1,41 +1,45 @@
+@import "//cdn.rawgit.com/necolas/normalize.css/master/normalize.css";
+@import "//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css";
+
+
 * {
-	margin: 0px;
-	padding: 0px;
-	font-family:verdana;	
+    margin: 0px;
+    padding: 0px;
+    font-family: NeuzeitGroTOT !important;
 }
 body {
-	margin:10px;		
+    margin:10px;
 }
 table {
-	width:100%;
+    width:100%;
 }
 th {
-	text-align:left;
+    text-align:left;
 }
 td, div, th {
-	font-size:11px;
-}	
+    font-size:11px;
+}
 h1 {
-	font-size:18px;
+    font-size:18px;
 }
 #navigation {
-	border-bottom:1px solid gray;
-	height: 49px;
-	padding-bottom: 10px;
-	margin-bottom: 20px;
+    border-bottom:1px solid gray;
+    height: 49px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 .button {
-	float:left;
-	margin-right:20px;
-	display: flex;
-	/* justify-content: center; */
+    float:left;
+    margin-right:20px;
+    display: flex;
+    /* justify-content: center; */
 }
 #wrapper {
-	width:980px;
-	border:1px solid gray;
-	padding:20px;
-	padding-top: 10px;
-	margin: auto;
+    width:980px;
+    border:1px solid gray;
+    padding:20px;
+    padding-top: 10px;
+    margin: auto;
 }
 
 #logo {
