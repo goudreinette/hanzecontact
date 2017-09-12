@@ -45,15 +45,15 @@
      */
     function displayNavigation() {
         echo "<div id=\"navigation\">";
-        echo "	<div class=\"button\">
+        echo "	<div class=\"\">
                     <a href=\"index.php?action=home\">
                         <img id='logo' src='./images/logo.jpeg'/>
                         Home
                     </a>
                 </div>";
-        echo "	<div class=\"button\"><a href=\"index.php?action=employees\">Medewerkers</a></div>";
-        echo "	<div class=\"button\"><a href=\"index.php?action=locations\">Locaties</a></div>";
-        echo "	<div class=\"button\"><a href=\"index.php?action=jobs\">Banen</a></div>";
+        echo "	<div class=\"\"><a href=\"index.php?action=employees\">Medewerkers</a></div>";
+        echo "	<div class=\"\"><a href=\"index.php?action=locations\">Locaties</a></div>";
+        echo "	<div class=\"\"><a href=\"index.php?action=jobs\">Banen</a></div>";
         echo "</div>";
     }
 
