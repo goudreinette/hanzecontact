@@ -15,7 +15,11 @@
     /**
      * Resources
      */
-    $jobs = new Resource("Jobs");
+    $jobs = new Resource("Jobs", [
+        'JobTitle' => 'Titel',
+        'MinSalary' => 'Minimum salaris',
+        'MaxSalary' => 'Maximum salaris' 
+    ]);
 
 
     // Hieronder alle functies die geen output genereren naar de browser

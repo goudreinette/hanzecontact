@@ -5,12 +5,13 @@
 class Resource
 {
 
-    function __construct($table)
+    function __construct($table, $labels)
     {
         global $mysqli;
 
         $this->mysqli = $mysqli;
         $this->table = $table;
+        $this->labels = $labels;
         $this->columns = $mysqli->query("DESCRIBE $table")->fetch_all();
     }
 
@@ -29,29 +30,30 @@ class Resource
             <br/>
             <br/>
 
-            <table>
-                <tr>
-                     <th>Titel</td>;
-                     <th>Minimum salaris</td>
-                     <th>Maximum salaris</td>
-                     <th>Actie</td>
-                </tr>";
+            <table>";
+
+
+        echo "<tr>";
+        foreach ($this->labels as $column => $label)
+            echo "<th>{$label}</th>";
+        echo "<th>Actie</th>";
+        echo "</tr>";
 
 
         while($row = $result->fetch_assoc()) {
             $row = escapeArray($row); // alle slashes weghalen
-
-            echo"	<tr>";
-            echo"		<td>".$row['JobTitle']."</td>";
-            echo"		<td>".$row['MinSalary']."</td>";
-            echo"		<td>".$row['MaxSalary']."</td>";
-            echo"		<td>";
-            echo"			<a href=\"index.php?action=editjob&id=".$row['JobID']."\">Bewerken</a>";
-            echo"			|";
-            echo"			<a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=deletejob&id=".$row['JobID']."');\">Verwijderen</a>";
-            echo"		</td>";
-            echo"	</tr>";
+            echo"<tr>";
+            foreach ($this->labels as $column => $label) {
+                echo"<td>".$row[$column]."</td>";
+            }
+            echo"<td>
+                    <a href=\"index.php?action=editjob&id=".$row['JobID']."\">Bewerken</a>
+                    |
+                    <a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=deletejob&id=".$row['JobID']."');\">Verwijderen</a>
+                </td>
+            </tr>";
         }
+
         echo"</table>";
     }
 
