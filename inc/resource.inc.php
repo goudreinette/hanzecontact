@@ -131,7 +131,12 @@ class Resource
 
     function buildInsertString()
     {
-        return "(" . implode(',', array_column($this->columns, 0)) . ")";
+        $names = array_column($this->columns, 0);
+        $quoted = array_map(function ($name) {
+            return "`$name`";
+        }, $names);
+
+        return "(" . implode(',', $quoted) . ")";
     }
 
     /**
