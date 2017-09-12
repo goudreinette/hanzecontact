@@ -1,4 +1,4 @@
-<?php    
+<?php
 
     error_reporting(E_ALL);
 
@@ -13,6 +13,7 @@
     // Hieronder alle functies die geen output genereren naar de browser
     // Dit is nodig om de 'warning headers already sent' fout te voorkomen
     switch(getCurrentAction()) {
+        // Jobs
         case "insertjob":
             addJob();
         break;
@@ -29,6 +30,7 @@
 
     // Hieronder alle functies die wel output genereren naar de browser
     switch(getCurrentAction()) {
+        // Jobs
         case "jobs":
             displayAllJobs();
         break;
