@@ -19,29 +19,7 @@
      */
     function displayAddJob() {
 
-        echo"<h1>Baan bewerken</h1>";
 
-        echo" <form method=\"post\" action=\"index.php?action=insertjob\">";
-        echo" 	<table>";
-        echo"		<tr>";
-        echo"			<td>Titel:</td>";
-        echo"			<td><input type=\"text\" name=\"JobTitle\" /></td>";
-        echo"		</tr>";
-        echo"		<tr>";
-        echo"			<td>Minimuloon:</td>";
-        echo"			<td><input type=\"text\" name=\"MinSalary\" /></td>";
-        echo"		</tr>";
-        echo"		<tr>";
-        echo"			<td>Maximumloon:</td>";
-        echo"			<td><input type=\"text\" name=\"Maxsalary\" /></td>";
-        echo"		</tr>";
-        echo"		<tr>";
-        echo"			<td></td>";
-        echo"			<td><input type=\"submit\" value=\"Opslaan\" /></td>";
-        echo"		</tr>";
-        echo" 	</table>";
-
-        echo" </form>";
     }
 
     /**
@@ -105,7 +83,7 @@
         $sql = sprintf("INSERT INTO `Jobs` (`JobTitle`, `MinSalary`, `MaxSalary`) VALUES  ('%s', '%f', '%f')",
                         $mysqli->escape_string($_POST['JobTitle']),
                         $mysqli->escape_string($_POST['MinSalary']),
-                        $mysqli->escape_string($_POST['Maxsalary']) );
+                        $mysqli->escape_string($_POST['MaxSalary']) );
 
         $mysqli->query($sql);
 
@@ -126,7 +104,7 @@
                         WHERE `JobID` = %d",
                         $mysqli->escape_string($_POST['JobTitle']),
                         $mysqli->escape_string($_POST['MinSalary']),
-                        $mysqli->escape_string($_POST['Maxsalary']),
+                        $mysqli->escape_string($_POST['MaxSalary']),
                         $mysqli->escape_string($_POST['JobID']) );
 
         $mysqli->query($sql);

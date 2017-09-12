@@ -64,7 +64,7 @@
             $jobs->displayAdd();
         break;
         case "editjob":
-            displayEditJob();
+            $jobs->displayEdit();
         break;
 
         // Locations

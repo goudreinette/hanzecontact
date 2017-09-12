@@ -92,7 +92,7 @@ class Resource
     function displayEdit()
     {
 
-        $sql = sprintf( "SELECT * FROM $his->table WHERE `JobID` = %d",
+        $sql = sprintf( "SELECT * FROM $this->table WHERE `$this->pk` = %d",
                         $this->mysqli->escape_string($_GET['id']) );
 
         $result = $this->mysqli->query($sql);
