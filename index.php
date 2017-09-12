@@ -1,4 +1,4 @@
-<?php
+<?php    
 
     error_reporting(E_ALL);
 
@@ -48,5 +48,6 @@
     displayFooter(); // de HTML footer tonen
 
     databaseDisconnect(); // verbinding met de database verbreken
+
 
 ?>
