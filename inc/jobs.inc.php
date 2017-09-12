@@ -83,7 +83,7 @@
         global $mysqli;
 
         $sql = sprintf( "SELECT * FROM `Jobs` WHERE `JobID` = %d",
-                        mysqli_escape_string($_GET['id']) );
+                        $mysqli->escape_string($_GET['id']) );
 
         $result = $mysqli->query($sql);
 
@@ -133,9 +133,9 @@
         // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
 
         $sql = sprintf("INSERT INTO `Jobs` (`JobTitle`, `MinSalary`, `MaxSalary`) VALUES  ('%s', '%f', '%f')",
-                        mysqli_escape_string($_POST['JobTitle']),
-                        mysqli_escape_string($_POST['MinSalary']),
-                        mysqli_escape_string($_POST['Maxsalary']) );
+                        $mysqli->escape_string($_POST['JobTitle']),
+                        $mysqli->escape_string($_POST['MinSalary']),
+                        $mysqli->escape_string($_POST['Maxsalary']) );
 
         $mysqli->query($sql);
 
@@ -154,10 +154,10 @@
                         `MinSalary` = '%s',
                         `MaxSalary` = '%s'
                         WHERE `JobID` = %d",
-                        mysqli_escape_string($_POST['JobTitle']),
-                        mysqli_escape_string($_POST['MinSalary']),
-                        mysqli_escape_string($_POST['Maxsalary']),
-                        mysqli_escape_string($_POST['JobID']) );
+                        $mysqli->escape_string($_POST['JobTitle']),
+                        $mysqli->escape_string($_POST['MinSalary']),
+                        $mysqli->escape_string($_POST['Maxsalary']),
+                        $mysqli->escape_string($_POST['JobID']) );
 
         $mysqli->query($sql);
 
@@ -171,7 +171,7 @@
     function deleteJob() {
         global $mysqli;
 
-        $sql = sprintf("DELETE FROM `Jobs` WHERE `JobID` = %d", mysqli_escape_string($_GET['id']));
+        $sql = sprintf("DELETE FROM `Jobs` WHERE `JobID` = %d", $mysqli->escape_string($_GET['id']));
         $mysqli->query($sql);
 
         header("location: index.php?action=jobs"); // terugkeren naar jobs
