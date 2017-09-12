@@ -4,9 +4,10 @@
      * Deze functie laat alle banen in het systeem zien	 *
      */
     function displayAllJobs() {
+        global $mysqli;
 
         $sql = "SELECT * FROM `Jobs` ORDER BY `JobTitle`";
-        $result = mysql_query($sql);
+        $result = $mysqli->query($sql);
 
         echo"<h1>Banen</h1>";
 
@@ -24,7 +25,7 @@
         echo" 		<th>Actie</td>";
         echo"	</tr>";
 
-        while($row = mysql_fetch_assoc($result)) {
+        while($result && $row = $result->fetch_assoc()) {
 
             $row = escapeArray($row); // alle slashes weghalen
 
@@ -79,13 +80,14 @@
      */
 
     function displayEditJob() {
+        global $mysqli;
 
         $sql = sprintf( "SELECT * FROM `Jobs` WHERE `JobID` = %d",
                         mysql_escape_string($_GET['id']) );
 
-        $result = mysql_query($sql);
+        $result = $mysqli->query($sql);
 
-        if($row = mysql_fetch_assoc($result)) {
+        if($row = $result->fetch_assoc()) {
 
             $row = escapeArray($row); // alle slashes weghalen
 
@@ -125,6 +127,7 @@
      * Deze functie voegt een nieuwe record toe aan de tabel Jobs	 *
      */
     function addJob() {
+        global $mysqli;
 
         // Letop we maken gebruik van sprintf. Kijk op php.net voor meer info.
         // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
@@ -134,7 +137,7 @@
                         mysql_escape_string($_POST['MinSalary']),
                         mysql_escape_string($_POST['Maxsalary']) );
 
-        mysql_query($sql);
+        $mysqli->query($sql);
 
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -145,6 +148,7 @@
      */
 
     function updateJob() {
+        global $mysqli;
         $sql = sprintf("UPDATE `Jobs` SET
                         `JobTitle` = '%s',
                         `MinSalary` = '%s',
@@ -155,7 +159,7 @@
                         mysql_escape_string($_POST['Maxsalary']),
                         mysql_escape_string($_POST['JobID']) );
 
-        mysql_query($sql);
+        $mysqli->query($sql);
 
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -165,8 +169,10 @@
      * Deze functie verwijderd record met id $_GET['ID']  uit de tabel Jobs
      */
     function deleteJob() {
+        global $mysqli;
+
         $sql = sprintf("DELETE FROM `Jobs` WHERE `JobID` = %d", mysql_escape_string($_GET['id']));
-        mysql_query($sql);
+        $mysqli->query($sql);
 
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
