@@ -5,10 +5,18 @@
     include("conf/config.conf.php"); // De configuratie van het systeem
     include("inc/database.inc.php"); // Funties om verbinding met de database te maken
 
+    include("inc/resource.inc.php"); //Resource
     include("inc/general.inc.php"); // Algemene functies zoals drawHeader en drawFooter
     include("inc/jobs.inc.php"); // Algemene functies zoals drawHeader en drawFooter
 
     databaseConnect(); // verbinding met de database maken
+
+
+    /**
+     * Resources
+     */
+    $jobs = new Resource("Jobs");
+
 
     // Hieronder alle functies die geen output genereren naar de browser
     // Dit is nodig om de 'warning headers already sent' fout te voorkomen
@@ -32,7 +40,7 @@
     switch(getCurrentAction()) {
         // Jobs
         case "jobs":
-            displayAllJobs();
+            $jobs->display();
         break;
         case "addjob":
             displayAddJob();
