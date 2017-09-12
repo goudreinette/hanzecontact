@@ -47,7 +47,7 @@
             $jobs->display();
         break;
         case "addjob":
-            displayAddJob();
+            $jobs->displayAdd();
         break;
         case "editjob":
             displayEditJob();

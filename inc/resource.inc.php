@@ -11,7 +11,6 @@ class Resource
 
         $this->mysqli = $mysqli;
         $this->table = $table;
-        $this->displayName = $displayName;
         $this->labels = $labels;
         $this->columns = $mysqli->query("DESCRIBE $table")->fetch_all();
     }
@@ -27,7 +26,7 @@ class Resource
         echo "
             <h1>Banen</h1>
             <br/>
-            <input type='button' onclick='document.location.href='?action=addjob';' value='Baan toevoegen' />
+            <input type='button' onclick='document.location.href=\"?action=addjob\"' value='Baan toevoegen' />
             <br/>
             <br/>
 
