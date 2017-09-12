@@ -32,7 +32,7 @@ class Resource
         $result = $this->mysqli->query("SELECT * FROM $this->table");
 
         echo "
-            <h1>Banen</h1>
+            <h1>$this->table</h1>
             <br/>
             <input type='button' onclick='document.location.href=\"?action=addjob\"' value='Baan toevoegen' />
             <br/>

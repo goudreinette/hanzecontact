@@ -26,6 +26,15 @@
         'City' => 'Stad'
     ]);
 
+    $employees = new Resource("Employees", [
+        'FirstName' => 'Voornaam',
+        'LastName' => 'Achternaam'
+    ]);
+
+    /**
+     * TODO: switch statement vervangen door lookup in array van resources met default
+     */
+
 
     // Hieronder alle functies die geen output genereren naar de browser
     // Dit is nodig om de 'warning headers already sent' fout te voorkomen
@@ -62,6 +71,12 @@
         case "locations":
             $locations->display();
         break;
+
+        // Employees
+        case "employees":
+            $employees->display();
+        break;
+
         default:
         case "home":
             displayHome();
