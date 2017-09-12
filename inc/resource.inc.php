@@ -129,24 +129,30 @@ class Resource
         }
     }
 
+    function buildInsertString()
+    {
+        return "(" . implode(',', array_column($this->columns, 0)) . ")";
+    }
 
     /**
      * CRUD functions
      */
-    function add()
+    function insert()
     {
 
         // Letop we maken gebruik van sprintf. Kijk op php.net voor meer info.
         // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
 
-        $sql = sprintf("INSERT INTO `$this->table` (`JobTitle`, `MinSalary`, `MaxSalary`) VALUES  ('%s', '%f', '%f')",
+        $sql = sprintf("INSERT INTO `$this->table` {$this->buildInsertString()} VALUES  ('%s', '%f', '%f')",
                         $this->mysqli->escape_string($_POST['JobTitle']),
                         $this->mysqli->escape_string($_POST['MinSalary']),
                         $this->mysqli->escape_string($_POST['MaxSalary']) );
 
-        $mysqli->query($sql);
+        print_r($sql);
 
-        header("location: index.php?action=jobs"); // terugkeren naar jobs
+        $this->mysqli->query($sql);
+
+        // header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
     }
 
