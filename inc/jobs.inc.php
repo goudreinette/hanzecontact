@@ -25,7 +25,7 @@
         echo" 		<th>Actie</td>";
         echo"	</tr>";
 
-        while($result && $row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
 
             $row = escapeArray($row); // alle slashes weghalen
 
