@@ -136,15 +136,45 @@ class Resource
     function add()
     {
 
+        // Letop we maken gebruik van sprintf. Kijk op php.net voor meer info.
+        // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
+
+        $sql = sprintf("INSERT INTO `$this->table` (`JobTitle`, `MinSalary`, `MaxSalary`) VALUES  ('%s', '%f', '%f')",
+                        $this->mysqli->escape_string($_POST['JobTitle']),
+                        $this->mysqli->escape_string($_POST['MinSalary']),
+                        $this->mysqli->escape_string($_POST['MaxSalary']) );
+
+        $mysqli->query($sql);
+
+        header("location: index.php?action=jobs"); // terugkeren naar jobs
+        exit();
     }
 
     function update()
     {
+        global $mysqli;
+        $sql = sprintf("UPDATE `Jobs` SET
+                        `JobTitle` = '%s',
+                        `MinSalary` = '%s',
+                        `MaxSalary` = '%s'
+                        WHERE `JobID` = %d",
+                        $mysqli->escape_string($_POST['JobTitle']),
+                        $mysqli->escape_string($_POST['MinSalary']),
+                        $mysqli->escape_string($_POST['MaxSalary']),
+                        $mysqli->escape_string($_POST['JobID']) );
 
+        $mysqli->query($sql);
+
+        header("location: index.php?action=jobs"); // terugkeren naar jobs
+        exit();
     }
 
     function delete()
     {
 
+        $sql = sprintf("DELETE FROM `$this->table` WHERE `$this->pk` = %d", $mysqli->escape_string($_GET['id']));
+        $this->mysqli->query($sql);
+        header("location: index.php?action=jobs"); // terugkeren naar jobs
+        exit();
     }
 }

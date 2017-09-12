@@ -41,13 +41,13 @@
     switch(getCurrentAction()) {
         // Jobs
         case "insertjob":
-            addJob();
+            $jobs->insert();
         break;
         case "updatejob":
-            updateJob();
+            $jobs->update();
         break;
         case "deletejob":
-            deleteJob();
+            $jobs->delete();
         break;
     }
 
