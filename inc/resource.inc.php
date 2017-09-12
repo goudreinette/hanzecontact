@@ -67,27 +67,25 @@ class Resource
 
     function displayAdd()
     {
-        echo"<h1>Baan bewerken</h1>
+        echo"
+            <h1>Baan bewerken</h1>
+            <form method=\"post\" action=\"index.php?action=insertjob\">
+             <table> ";
 
-         <form method=\"post\" action=\"index.php?action=insertjob\">
-             <table>
-                <tr>
-                    <td>Titel:</td>
-                    <td><input type=\"text\" name=\"JobTitle\" /></td>
-                </tr>
-                <tr>
-                    <td>Minimuloon:</td>
-                    <td><input type=\"text\" name=\"MinSalary\" /></td>
-                </tr>
-                <tr>
-                    <td>Maximumloon:</td>
-                    <td><input type=\"text\" name=\"Maxsalary\" /></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type=\"submit\" value=\"Opslaan\" /></td>
-                </tr>
-                </table>
+                 foreach ($this->labels as $column => $label) {
+                     echo"		<tr>";
+                     echo"			<td>$label:</td>";
+                     echo"			<td><input type=\"text\" name=\"$column\"/></td>";
+                     echo"		</tr>";
+                 }
+
+        echo"		<tr>";
+        echo"			<td></td>";
+        echo"			<td><input type=\"submit\" value=\"Opslaan\" /></td>";
+        echo"		</tr>";
+
+        echo "
+            </table>
         </form>";
     }
 
@@ -121,7 +119,7 @@ class Resource
             echo"		</tr>";
             echo" 	</table>";
 
-            echo" <input type=\"hidden\" name=\"JobID\" value=\"".$row['JobID']."\" />";
+            echo" <input type=\"hidden\" name=\"JobID\" value=\"".$row[$this->pk]."\" />";
 
             echo" </form>";
 
