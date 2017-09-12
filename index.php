@@ -21,6 +21,11 @@
         'MaxSalary' => 'Maximum salaris'
     ]);
 
+    $locations = new Resource("Locations", [
+        'StreetAddress' => 'Adres',
+        'City' => 'Stad'
+    ]);
+
 
     // Hieronder alle functies die geen output genereren naar de browser
     // Dit is nodig om de 'warning headers already sent' fout te voorkomen
@@ -51,6 +56,11 @@
         break;
         case "editjob":
             displayEditJob();
+        break;
+
+        // Locations
+        case "locations":
+            $locations->display();
         break;
         default:
         case "home":
