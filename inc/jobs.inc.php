@@ -9,38 +9,8 @@
         $sql = "SELECT * FROM `Jobs` ORDER BY `JobTitle`";
         $result = $mysqli->query($sql);
 
-        echo"<h1>Banen</h1>";
 
-        echo"<br/>";
-        echo"<input type=\"button\" onclick=\"document.location.href='?action=addjob';\" value=\"Baan toevoegen\" />";
-        echo"<br/>";
-        echo"<br/>";
 
-        echo"<table>";
-
-        echo"	<tr>";
-        echo" 		<th>Titel</td>";
-        echo" 		<th>Minimum salaris</td>";
-        echo" 		<th>Maximum salaris</td>";
-        echo" 		<th>Actie</td>";
-        echo"	</tr>";
-
-        while($row = $result->fetch_assoc()) {
-
-            $row = escapeArray($row); // alle slashes weghalen
-
-            echo"	<tr>";
-            echo"		<td>".$row['JobTitle']."</td>";
-            echo"		<td>".$row['MinSalary']."</td>";
-            echo"		<td>".$row['MaxSalary']."</td>";
-            echo"		<td>";
-            echo"			<a href=\"index.php?action=editjob&id=".$row['JobID']."\">Bewerken</a>";
-            echo"			|";
-            echo"			<a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=deletejob&id=".$row['JobID']."');\">Verwijderen</a>";
-            echo"		</td>";
-            echo"	</tr>";
-        }
-        echo"</table>";
     }
 
 

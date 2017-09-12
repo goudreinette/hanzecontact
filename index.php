@@ -18,7 +18,7 @@
     $jobs = new Resource("Jobs", [
         'JobTitle' => 'Titel',
         'MinSalary' => 'Minimum salaris',
-        'MaxSalary' => 'Maximum salaris' 
+        'MaxSalary' => 'Maximum salaris'
     ]);
 
 

@@ -11,6 +11,7 @@ class Resource
 
         $this->mysqli = $mysqli;
         $this->table = $table;
+        $this->displayName = $displayName;
         $this->labels = $labels;
         $this->columns = $mysqli->query("DESCRIBE $table")->fetch_all();
     }
@@ -59,7 +60,28 @@ class Resource
 
     function displayAdd()
     {
+        echo"<h1>Baan bewerken</h1>
 
+         <form method=\"post\" action=\"index.php?action=insertjob\">
+             <table>
+                <tr>
+                    <td>Titel:</td>
+                    <td><input type=\"text\" name=\"JobTitle\" /></td>
+                </tr>
+                <tr>
+                    <td>Minimuloon:</td>
+                    <td><input type=\"text\" name=\"MinSalary\" /></td>
+                </tr>
+                <tr>
+                    <td>Maximumloon:</td>
+                    <td><input type=\"text\" name=\"Maxsalary\" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type=\"submit\" value=\"Opslaan\" /></td>
+                </tr>
+                </table>
+        </form>";
     }
 
     function displayEdit()
