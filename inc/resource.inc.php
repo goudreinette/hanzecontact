@@ -129,15 +129,6 @@ class Resource
         }
     }
 
-    function buildInsertString()
-    {
-        $names = array_column($this->columns, 0);
-        $quoted = array_map(function ($name) {
-            return "`$name`";
-        }, $names);
-
-        return "(" . implode(',', $quoted) . ")";
-    }
 
     /**
      * CRUD functions
@@ -148,14 +139,14 @@ class Resource
         // Letop we maken gebruik van sprintf. Kijk op php.net voor meer info.
         // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
 
-        $sql = sprintf("INSERT INTO `$this->table` {$this->buildInsertString()} VALUES  ('%s', '%f', '%f')",
+        $sql = sprintf("INSERT INTO `$this->table` {$this->columnNameString()} VALUES  ('%s', '%f', '%f')",
                         $this->mysqli->escape_string($_POST['JobTitle']),
                         $this->mysqli->escape_string($_POST['MinSalary']),
                         $this->mysqli->escape_string($_POST['MaxSalary']) );
 
-        print_r($sql);
 
-        $this->mysqli->query($sql);
+
+        print_r($this->mysqli->query($sql)->error);
 
         // header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -187,5 +178,19 @@ class Resource
         $this->mysqli->query($sql);
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
+    }
+
+
+    /**
+     * Helpers
+     */
+    function columnNameString()
+    {
+        $names = array_column($this->columns, 0);
+        $quoted = array_map(function ($name) {
+            return "`$name`";
+        }, $names);
+
+        return "(" . implode(',', $quoted) . ")";
     }
 }
