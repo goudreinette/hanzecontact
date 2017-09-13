@@ -186,9 +186,9 @@ class Resource
      */
     function columnNameString()
     {
-        $names = array_column($this->columns, 0);
+        $names     = array_column($this->columns, 0);
         $withoutPk = array_diff($names, [$this->pk]);
-        $quoted = array_map(function ($name) {
+        $quoted    = array_map(function ($name) {
             return "`$name`";
         }, $withoutPk);
 
