@@ -144,11 +144,9 @@ class Resource
                         $this->mysqli->escape_string($_POST['MinSalary']),
                         $this->mysqli->escape_string($_POST['MaxSalary']) );
 
+        $this->mysqli->query($sql);
 
-
-                        print_r($sql);
-
-        // header("location: index.php?action=jobs"); // terugkeren naar jobs
+        header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
     }
 
@@ -173,8 +171,7 @@ class Resource
 
     function delete()
     {
-
-        $sql = sprintf("DELETE FROM `$this->table` WHERE `$this->pk` = %d", $mysqli->escape_string($_GET['id']));
+        $sql = sprintf("DELETE FROM `$this->table` WHERE `$this->pk` = %d", $this->mysqli->escape_string($_GET['id']));
         $this->mysqli->query($sql);
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -189,7 +186,7 @@ class Resource
         $names     = array_column($this->columns, 0);
         $withoutPk = array_diff($names, [$this->pk]);
         $quoted    = array_map(function ($name) {
-            return "`$name`";
+            return "$name";
         }, $withoutPk);
 
         return "(" . implode(',', $quoted) . ")";
