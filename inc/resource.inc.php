@@ -145,14 +145,11 @@ class Resource
                         $this->mysqli->escape_string($_POST['MaxSalary']) );
 
         $this->mysqli->query($sql);
-
-        header("location: index.php?action=jobs"); // terugkeren naar jobs
-        exit();
+        $this->returnToResource();
     }
 
     function update()
     {
-        global $mysqli;
         $sql = sprintf("UPDATE `Jobs` SET {$this->columnSetString()}
                         WHERE `$this->pk` = %d",
                         $this->mysqli->escape_string($_POST['JobTitle']),
@@ -161,9 +158,7 @@ class Resource
                         $this->mysqli->escape_string($_POST['JobID']) );
 
         $this->mysqli->query($sql);
-
-        header("location: index.php?action=jobs"); // terugkeren naar jobs
-        exit();
+        $this->returnToResource();
     }
 
     function delete()
@@ -172,7 +167,13 @@ class Resource
                         WHERE `$this->pk` = %d",
                         $this->mysqli->escape_string($_GET['id']));
         $this->mysqli->query($sql);
-        header("location: index.php?action=jobs"); // terugkeren naar jobs
+        $this->returnToResource();
+    }
+
+    function returnToResource()
+    {
+        $lowercase = strtolower($this->table);
+        header("location: index.php?action=$lowercase"); // terugkeren naar jobs
         exit();
     }
 
