@@ -153,11 +153,13 @@ class Resource
     function update()
     {
         global $mysqli;
-        $sql = sprintf("UPDATE `Jobs` SET
-                        `JobTitle` = '%s',
-                        `MinSalary` = '%s',
-                        `MaxSalary` = '%s'
-                        WHERE `JobID` = %d",
+
+        print_r($this->columnSetString());
+        exit();
+
+
+        $sql = sprintf("UPDATE `Jobs` SET {$this->columnSetString()}
+                        WHERE `$this->pk` = %d",
                         $mysqli->escape_string($_POST['JobTitle']),
                         $mysqli->escape_string($_POST['MinSalary']),
                         $mysqli->escape_string($_POST['MaxSalary']),
@@ -171,7 +173,9 @@ class Resource
 
     function delete()
     {
-        $sql = sprintf("DELETE FROM `$this->table` WHERE `$this->pk` = %d", $this->mysqli->escape_string($_GET['id']));
+        $sql = sprintf("DELETE FROM `$this->table`
+                        WHERE `$this->pk` = %d",
+                        $this->mysqli->escape_string($_GET['id']));
         $this->mysqli->query($sql);
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -181,14 +185,24 @@ class Resource
     /**
      * Helpers
      */
-    function columnNameString()
+    function columnNames()
     {
         $names     = array_column($this->columns, 0);
         $withoutPk = array_diff($names, [$this->pk]);
-        $quoted    = array_map(function ($name) {
-            return "$name";
-        }, $withoutPk);
+        return $withoutPk;
+    }
 
-        return "(" . implode(',', $quoted) . ")";
+    function columnNameString()
+    {
+        return "(" . implode(',', $this->columnNames()) . ")";
+    }
+
+    function columnSetString()
+    {
+        $withAssigments = array_map(function ($columnName) {
+            return "$columnName = %s";
+        }, $this->columnNames());
+
+        return implode(',', $withAssigments);
     }
 }
