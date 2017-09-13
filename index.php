@@ -42,8 +42,8 @@
 
 
     foreach ($resources as $resource) {
-        $lowercase = strtolower($resource->table);
-        $singular  = substr(0, -2);
+        $lowercase = $resource->lowercase;
+        $singular = $resource->singular;
 
         switch(getCurrentAction()) {
             // Jobs

@@ -9,11 +9,15 @@ class Resource
     {
         global $mysqli;
 
-        $this->mysqli = $mysqli;
-        $this->table = $table;
-        $this->labels = $labels;
-        $this->columns = $mysqli->query("DESCRIBE $table")->fetch_all();
-        $this->pk = $this->findPk($this->columns);
+        $this->mysqli    = $mysqli;
+
+        $this->table     = $table;
+        $this->lowercase = strtolower($this->table);
+        $this->singular  = substr($this->lowercase, 0, -1);
+
+        $this->labels    = $labels;
+        $this->columns   = $mysqli->query("DESCRIBE $table")->fetch_all();
+        $this->pk        = $this->findPk($this->columns);
     }
 
     function findPk($columns)
@@ -34,7 +38,7 @@ class Resource
         echo "
             <h1>$this->table</h1>
             <br/>
-            <input type='button' onclick='document.location.href=\"?action=addjob\"' value='Baan toevoegen' />
+            <input type='button' onclick='document.location.href=\"?action=add$this->singular\"' value='Toevoegen' />
             <br/>
             <br/>
 
@@ -172,8 +176,7 @@ class Resource
 
     function returnToResource()
     {
-        $lowercase = strtolower($this->table);
-        header("location: index.php?action=$lowercase"); // terugkeren naar jobs
+        header("location: index.php?action=$this->lowercase"); // terugkeren naar jobs
         exit();
     }
 
