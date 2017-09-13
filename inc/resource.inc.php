@@ -146,7 +146,7 @@ class Resource
 
 
 
-        print_r($this->mysqli->query($sql)->error);
+                        print_r($sql);
 
         // header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -187,9 +187,10 @@ class Resource
     function columnNameString()
     {
         $names = array_column($this->columns, 0);
+        $withoutPk = array_diff($names, [$this->pk]);
         $quoted = array_map(function ($name) {
             return "`$name`";
-        }, $names);
+        }, $withoutPk);
 
         return "(" . implode(',', $quoted) . ")";
     }
