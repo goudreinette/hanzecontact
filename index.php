@@ -28,7 +28,8 @@
 
     $employees = new Resource("Employees", [
         'FirstName' => 'Voornaam',
-        'LastName' => 'Achternaam'
+        'LastName' => 'Achternaam',
+        'Salary' => 'Salaris'
     ]);
 
     /**
