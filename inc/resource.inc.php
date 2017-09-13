@@ -153,19 +153,14 @@ class Resource
     function update()
     {
         global $mysqli;
-
-        print_r($this->columnSetString());
-        exit();
-
-
         $sql = sprintf("UPDATE `Jobs` SET {$this->columnSetString()}
                         WHERE `$this->pk` = %d",
-                        $mysqli->escape_string($_POST['JobTitle']),
-                        $mysqli->escape_string($_POST['MinSalary']),
-                        $mysqli->escape_string($_POST['MaxSalary']),
-                        $mysqli->escape_string($_POST['JobID']) );
+                        $this->mysqli->escape_string($_POST['JobTitle']),
+                        $this->mysqli->escape_string($_POST['MinSalary']),
+                        $this->mysqli->escape_string($_POST['MaxSalary']),
+                        $this->mysqli->escape_string($_POST['JobID']) );
 
-        $mysqli->query($sql);
+        $this->mysqli->query($sql);
 
         header("location: index.php?action=jobs"); // terugkeren naar jobs
         exit();
@@ -200,7 +195,7 @@ class Resource
     function columnSetString()
     {
         $withAssigments = array_map(function ($columnName) {
-            return "$columnName = %s";
+            return "$columnName = '%s'";
         }, $this->columnNames());
 
         return implode(',', $withAssigments);
