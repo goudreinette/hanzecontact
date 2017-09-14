@@ -31,11 +31,9 @@ class Resource
         $result = $this->mysqli->query("SELECT * FROM $this->table ORDER BY {$orderBy}");
 
         echo "
-            <h1>$this->table</h1>
-            <br/>
+            <h1>$this->table
             <input type='button' onclick='document.location.href=\"?action=add$this->singular\"' value='Toevoegen' />
-            <br/>
-            <br/>
+            </h1>
 
             <table id='display-list'>";
 
@@ -46,7 +44,7 @@ class Resource
                 {$this->labels[$column]}
                 <a href='?action=$this->lowercase&order=$column'>↓</a>
             </th>";
-        echo "<th>Actie</th>";
+        echo "<th id='actions'>Actie</th>";
         echo "</tr>";
 
 
@@ -55,7 +53,7 @@ class Resource
             echo"<tr>";
             foreach ($this->showInList as $column)
                 echo"<td>".$row[$column]."</td>";
-            echo"<td>
+            echo"<td id='actions'>
                     <a href=\"index.php?action=edit$this->singular&id=".$row[$this->pk]."\">Bewerken</a>
                     |
                     <a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=delete$this->singular&id=".$row[$this->pk]."');\">Verwijderen</a>

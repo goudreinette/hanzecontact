@@ -46,8 +46,8 @@
     function displayNavigation() {
         echo "<div id=\"navigation\">";
         echo "	<div class=\"\">
+                    <img id='logo' src='./images/logo.jpeg'/>
                     <a href=\"index.php?action=home\">
-                        <img id='logo' src='./images/logo.jpeg'/>
                         Home
                     </a>
                 </div>";

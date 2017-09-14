@@ -21,9 +21,17 @@ td, div, th {
 }
 h1 {
     font-size:32px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
 }
+
+
+/**
+ * Nav
+ */
 #navigation {
-    border-bottom:1px solid gray;
+    border-bottom: 1px solid #eee;
     height: 49px;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -32,13 +40,22 @@ h1 {
     float:left;
     margin-right:20px;
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: row;
 }
+
+#navigation a {
+
+}
+
+
 #wrapper {
     max-width:900px;
-    border:1px solid gray;
-    padding:20px;
-    padding-top: 10px;
+    border: 1px solid #eee;
+    padding: 30px;
+    padding-top: 15px;
     margin: auto;
 }
 
@@ -48,19 +65,24 @@ h1 {
 }
 
 a {
-    height: 100%;
+    padding: 2px;
     display: inline-block;
+    text-decoration: none;
     justify-content: center;
+    color: #ea861e;
     align-items: center;
 }
 
 
-#display-list th {
-    /* display: flex; */
-    flex-direction: row;
+a:hover {
+    background-color: rgba(234, 134, 30, 0.1);
+    color: #ea861e;
 }
 
-
-#navigation a {
+/**
+ * Table
+ */
+table #actions {
     display: flex;
+    justify-content: flex-end;
 }
