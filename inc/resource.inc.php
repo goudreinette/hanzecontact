@@ -76,11 +76,8 @@ class Resource
         <form method=\"post\" action=\"index.php?action=insertjob\">
              <table>";
         $this->displayInputFields();
-        echo"<tr>
-               <td></td>
-               <td><input type=\"submit\" value=\"Opslaan\" /></td>
-             </tr>
-            </table>
+        $this->displaySubmitButton();
+        echo"</table>
         </form>";
     }
 
@@ -96,20 +93,14 @@ class Resource
 
             $row = escapeArray($row); // alle slashes weghalen
 
-            echo"<h1>Baan bewerken</h1>";
-
-            echo" <form method=\"post\" action=\"index.php?action=updatejob\">";
-            echo" 	<table>";
-
+            echo"<h1>Baan bewerken</h1>
+             <form method=\"post\" action=\"index.php?action=updatejob\">
+                 <table>";
             $this->displayInputFields();
-
-
-            echo" 	</table>";
-
-            echo" <input type=\"hidden\" name=\"JobID\" value=\"".$row[$this->pk]."\" />";
-
-            echo" </form>";
-
+            $this->displaySubmitButton();
+            echo"</table>
+                 <input type=\"hidden\" name=\"JobID\" value=\"".$row[$this->pk]."\" />
+             </form>";
         }
         else {
             die("Geen gegevens gevonden");
