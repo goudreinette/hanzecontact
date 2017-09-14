@@ -27,7 +27,8 @@ class Resource
      */
     function display()
     {
-        $result = $this->mysqli->query("SELECT * FROM $this->table");
+        $orderBy = $_GET['order'] ?? $this->showInList[0];
+        $result = $this->mysqli->query("SELECT * FROM $this->table ORDER BY {$orderBy}");
 
         echo "
             <h1>$this->table</h1>
@@ -41,7 +42,10 @@ class Resource
 
         echo "<tr>";
         foreach ($this->showInList as $column)
-            echo "<th>{$this->labels[$column]}</th>";
+            echo "<th>
+                {$this->labels[$column]}
+                <a href='?action=$this->lowercase&order=$column'>↓</a>
+            </th>";
         echo "<th>Actie</th>";
         echo "</tr>";
 
