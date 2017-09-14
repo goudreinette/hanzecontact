@@ -1,6 +1,6 @@
 <? foreach ($this->columnNames() as $columnName):
     $label = $this->labels[$columnName] ?? $columnName;
-    $value = $values[$columnName] ?? '';
+    $value = $row[$columnName] ?? '';
 ?>
     <tr>
        <td><?= $label ?>:</td>
