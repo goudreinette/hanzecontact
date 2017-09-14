@@ -87,12 +87,12 @@ class Resource
             $row = escapeArray($row); // alle slashes weghalen
 
             echo"<h1>Baan bewerken</h1>
-             <form method=\"post\" action=\"index.php?action=updatejob\">
+             <form method=\"post\" action=\"index.php?action=update$this->singular\">
                  <table>";
             $this->displayInputFields($row);
             $this->displaySubmitButton();
             echo"</table>
-                 <input type=\"hidden\" name=\"JobID\" value=\"".$row[$this->pk]."\" />
+                 <input type=\"hidden\" name=\"$this->pk\" value=\"".$row[$this->pk]."\" />
              </form>";
         }
         else {
@@ -123,7 +123,7 @@ class Resource
     {
         $columnValues = array_intersect_key($_POST, array_flip($this->columnNames()));
         $sql = call_user_func_array('sprintf', array_merge([
-            "UPDATE `Jobs` SET {$this->columnSetString()} WHERE `$this->pk` = %d",
+            "UPDATE `$this->table` SET {$this->columnSetString()} WHERE `$this->pk` = %d",
         ], $columnValues, [$_POST[$this->pk]]));
 
         print_r($sql);
