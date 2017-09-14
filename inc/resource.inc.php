@@ -72,14 +72,14 @@ class Resource
     function displayAdd()
     {
         echo"
-            <h1>Baan bewerken</h1>
-            <form method=\"post\" action=\"index.php?action=insertjob\">
-             <table>
-                {$this->displayInputFields()}
-                <tr>
-                   <td></td>
-                   <td><input type=\"submit\" value=\"Opslaan\" /></td>
-                </tr>
+        <h1>Baan bewerken</h1>
+        <form method=\"post\" action=\"index.php?action=insertjob\">
+             <table>";
+        $this->displayInputFields();
+        echo"<tr>
+               <td></td>
+               <td><input type=\"submit\" value=\"Opslaan\" /></td>
+             </tr>
             </table>
         </form>";
     }
