@@ -26,7 +26,7 @@
                     Bewerken
                 </a>
                 |
-                <a href="javascript:confirmAction('Zeker weten?', 'index.php?action=delete<?= $this->singular ?>&id=<?= $row[$this->pk] ?>">
+                <a href="javascript:confirmAction('Zeker weten?', 'index.php?action=delete<?= $this->singular ?>&id=<?= $row[$this->pk] ?>')">
                     Verwijderen
                 </a>
             </td>
