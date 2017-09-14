@@ -110,10 +110,14 @@ class Resource
         // Letop we maken gebruik van sprintf. Kijk op php.net voor meer info.
         // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
 
-        $sql = sprintf("INSERT INTO `$this->table` {$this->columnNameString()} VALUES  ('%s', '%f', '%f')",
-                        $this->mysqli->escape_string($_POST['JobTitle']),
-                        $this->mysqli->escape_string($_POST['MinSalary']),
-                        $this->mysqli->escape_string($_POST['MaxSalary']) );
+        $columnValues = $this->getPostColumnValues();
+        $sql = call_user_func_array('sprintf', array_merge([
+            "INSERT INTO `$this->table` {$this->columnNameString()}
+             VALUES {$this->columnValuesString()}"
+        ], $columnValues));
+
+        print_r($sql);
+        exit();
 
         $this->mysqli->query($sql);
         $this->returnToResource();
@@ -123,7 +127,8 @@ class Resource
     {
         $columnValues = $this->getPostColumnValues();
         $sql = call_user_func_array('sprintf', array_merge([
-            "UPDATE `$this->table` SET {$this->columnSetString()} WHERE `$this->pk` = %d",
+            "UPDATE `$this->table` SET {$this->columnSetString()}
+             WHERE `$this->pk` = %d",
         ], $columnValues, [$_POST[$this->pk]]));
         $this->mysqli->query($sql);
         $this->returnToResource();
@@ -192,10 +197,16 @@ class Resource
     function columnSetString()
     {
         $withAssigments = array_map(function ($columnName) {
-            return "$columnName = '%s'";
+            return "$columnName = '%s'"; // TODO: insert right here to remove sprintf
         }, $this->columnNames());
 
         return implode(',', $withAssigments);
+    }
+
+    function columnValuesString()
+    {
+        $fill = array_fill(0, count($this->columnNames()), "'%s'");
+        return "(" . implode(',', $fill) . ")";
     }
 
     function getPostColumnValues()
