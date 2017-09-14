@@ -37,7 +37,7 @@ class Resource
             <br/>
             <br/>
 
-            <table>";
+            <table id='display-list'>";
 
 
         echo "<tr>";
