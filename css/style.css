@@ -8,6 +8,7 @@
 }
 body {
     margin:10px;
+    font-size: 16px;
 }
 table {
     width:100%;
@@ -16,10 +17,10 @@ th {
     text-align:left;
 }
 td, div, th {
-    font-size:11px;
+    font-size:16px;
 }
 h1 {
-    font-size:18px;
+    font-size:32px;
 }
 #navigation {
     border-bottom:1px solid gray;
