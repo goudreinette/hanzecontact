@@ -77,20 +77,16 @@ class Resource
     function displayEdit()
     {
 
-        $sql = sprintf( "SELECT * FROM $this->table WHERE `$this->pk` = %d",
-                        $this->mysqli->escape_string($_GET['id']) );
-
+        $sql = "SELECT * FROM $this->table WHERE `$this->pk` = {$_GET['id']}";
         $result = $this->mysqli->query($sql);
-
         if($row = $result->fetch_assoc()) {
-
             $row = escapeArray($row); // alle slashes weghalen
 
             echo"<h1>$this->singular bewerken</h1>
              <form method=\"post\" action=\"index.php?action=update$this->singular\">
                  <table>";
-            $this->displayInputFields($row);
-            $this->displaySubmitButton();
+                    $this->displayInputFields($row);
+                    $this->displaySubmitButton();
             echo"</table>
                  <input type=\"hidden\" name=\"$this->pk\" value=\"".$row[$this->pk]."\" />
              </form>";
