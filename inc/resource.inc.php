@@ -52,9 +52,9 @@ class Resource
             foreach ($this->showInList as $column)
                 echo"<td>".$row[$column]."</td>";
             echo"<td>
-                    <a href=\"index.php?action=editjob&id=".$row[$this->pk]."\">Bewerken</a>
+                    <a href=\"index.php?action=edit$this->singular&id=".$row[$this->pk]."\">Bewerken</a>
                     |
-                    <a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=deletejob&id=".$row[$this->pk]."');\">Verwijderen</a>
+                    <a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=delete$this->singular&id=".$row[$this->pk]."');\">Verwijderen</a>
                 </td>
             </tr>";
         }
@@ -121,12 +121,13 @@ class Resource
 
     function update()
     {
-        $sql = sprintf("UPDATE `Jobs` SET {$this->columnSetString()}
-                        WHERE `$this->pk` = %d",
-                        $this->mysqli->escape_string($_POST['JobTitle']),
-                        $this->mysqli->escape_string($_POST['MinSalary']),
-                        $this->mysqli->escape_string($_POST['MaxSalary']),
-                        $this->mysqli->escape_string($_POST['JobID']) );
+        $columnValues = array_intersect_key($_POST, array_flip($this->columnNames()));
+        $sql = call_user_func_array('sprintf', array_merge([
+            "UPDATE `Jobs` SET {$this->columnSetString()} WHERE `$this->pk` = %d",
+        ], $columnValues, [$_POST[$this->pk]]));
+
+        print_r($sql);
+        exit();
 
         $this->mysqli->query($sql);
         $this->returnToResource();
@@ -174,7 +175,6 @@ class Resource
     /**
      * Column Helpers
      */
-
     function findPk($columns)
     {
         return array_filter($columns, function($column) {
