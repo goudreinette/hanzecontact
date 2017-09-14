@@ -65,8 +65,8 @@ class Resource
     function displayAdd()
     {
         echo"
-        <h1>Baan bewerken</h1>
-        <form method=\"post\" action=\"index.php?action=insertjob\">
+        <h1>$this->table bewerken</h1>
+        <form method=\"post\" action=\"index.php?action=insert$this->singular\">
              <table>";
         $this->displayInputFields();
         $this->displaySubmitButton();
@@ -86,7 +86,7 @@ class Resource
 
             $row = escapeArray($row); // alle slashes weghalen
 
-            echo"<h1>Baan bewerken</h1>
+            echo"<h1$this->table bewerken</h1>
              <form method=\"post\" action=\"index.php?action=update$this->singular\">
                  <table>";
             $this->displayInputFields($row);
