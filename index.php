@@ -38,12 +38,20 @@
                  'LastName' => 'Achternaam',
                  'Salary' => 'Salaris'
              ]
-         ])
+         ]),
+          new Resource("Departments", [
+              'showInList' => ['DepartmentName'],
+              'labels' => [
+                  'DepartmentName' => 'Naam',
+                  'ManagerID' => 'Manager ID',
+                  'LocationID' => 'Locatie ID'
+              ]
+          ]),
      ];
 
 
     displayHeader(); // de HTML header tonen
-    displayNavigation(); // de menubalk tonen
+    displayNavigation($resources); // de menubalk tonen
 
     dispatch($resources);
 

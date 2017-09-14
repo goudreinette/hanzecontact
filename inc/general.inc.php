@@ -43,18 +43,8 @@
     /**
      * Deze functie laat het navigatiemenu zien
      */
-    function displayNavigation() {
-        echo "<div id=\"navigation\">";
-        echo "	<div class=\"\">
-                    <img id='logo' src='./pictures/logo.jpeg'/>
-                    <a href=\"index.php?action=home\">
-                        Home
-                    </a>
-                </div>";
-        echo "	<div class=\"\"><a href=\"index.php?action=employees\">Medewerkers</a></div>";
-        echo "	<div class=\"\"><a href=\"index.php?action=locations\">Locaties</a></div>";
-        echo "	<div class=\"\"><a href=\"index.php?action=jobs\">Banen</a></div>";
-        echo "</div>";
+    function displayNavigation($resources) {
+        include "templates/navigation.php";
     }
 
     /**
