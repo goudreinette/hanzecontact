@@ -94,4 +94,40 @@
         }
     }
 
+
+    function dispatch($resources)
+    {
+        foreach ($resources as $resource) {
+            $lowercase = $resource->lowercase;
+            $singular = $resource->singular;
+
+            switch(getCurrentAction()) {
+                // Jobs
+                case "insert$singular":
+                    $resource->insert();
+                break;
+                case "update$singular":
+                    $resource->update();
+                break;
+                case "delete$singular":
+                    $resource->delete();
+                break;
+            }
+
+
+            // Hieronder alle functies die wel output genereren naar de browser
+            switch(getCurrentAction()) {
+                // Jobs
+                case $lowercase:
+                    $resource->display();
+                break;
+                case "add$singular":
+                    $resource->displayAdd();
+                break;
+                case "edit$singular":
+                    $resource->displayEdit();
+                break;
+            }
+        }
+    }
 ?>
