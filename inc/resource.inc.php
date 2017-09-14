@@ -21,13 +21,6 @@ class Resource
         $this->pk         = $this->findPk($this->columns);
     }
 
-    function findPk($columns)
-    {
-        return array_filter($columns, function($column) {
-            return $column[3] == 'PRI';
-        })[0][0];
-    }
-
 
     /**
      * Display functions
@@ -179,8 +172,16 @@ class Resource
 
 
     /**
-     * Helpers
+     * Column Helpers
      */
+
+    function findPk($columns)
+    {
+        return array_filter($columns, function($column) {
+            return $column[3] == 'PRI';
+        })[0][0];
+    }
+
     function columnNames()
     {
         $names     = array_column($this->columns, 0);
