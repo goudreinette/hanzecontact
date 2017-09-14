@@ -30,7 +30,7 @@ class Resource
         $result = $this->mysqli->query("SELECT * FROM $this->table");
 
         echo "
-            <h1>$this->table</h1>
+            <h1>$this->singular</h1>
             <br/>
             <input type='button' onclick='document.location.href=\"?action=add$this->singular\"' value='Toevoegen' />
             <br/>
@@ -65,7 +65,7 @@ class Resource
     function displayAdd()
     {
         echo"
-        <h1>$this->table bewerken</h1>
+        <h1>$this->singular bewerken</h1>
         <form method=\"post\" action=\"index.php?action=insert$this->singular\">
              <table>";
         $this->displayInputFields();
