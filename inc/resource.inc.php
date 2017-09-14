@@ -101,17 +101,9 @@ class Resource
             echo" <form method=\"post\" action=\"index.php?action=updatejob\">";
             echo" 	<table>";
 
-            foreach ($this->labels as $column => $label) {
-                echo"		<tr>";
-                echo"			<td>$label:</td>";
-                echo"			<td><input type=\"text\" name=\"$column\" value=\"".$row[$column]."\" /></td>";
-                echo"		</tr>";
-            }
+            $this->displayInputFields();
 
-            echo"		<tr>";
-            echo"			<td></td>";
-            echo"			<td><input type=\"submit\" value=\"Opslaan\" /></td>";
-            echo"		</tr>";
+
             echo" 	</table>";
 
             echo" <input type=\"hidden\" name=\"JobID\" value=\"".$row[$this->pk]."\" />";
@@ -184,6 +176,14 @@ class Resource
              echo"			<td><input type=\"text\" name=\"$columnName\"/></td>";
              echo"		</tr>";
          }
+    }
+
+    function displaySubmitButton()
+    {
+        echo "<tr>
+            <td></td>
+            <td><input type=\"submit\" value=\"Opslaan\" /></td>
+        </tr>";
     }
 
 
