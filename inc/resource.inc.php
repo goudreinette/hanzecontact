@@ -89,7 +89,7 @@ class Resource
             echo"<h1>Baan bewerken</h1>
              <form method=\"post\" action=\"index.php?action=updatejob\">
                  <table>";
-            $this->displayInputFields();
+            $this->displayInputFields($row);
             $this->displaySubmitButton();
             echo"</table>
                  <input type=\"hidden\" name=\"JobID\" value=\"".$row[$this->pk]."\" />
@@ -150,14 +150,13 @@ class Resource
     /**
      * Views
      */
-    function displayInputFields()
+    function displayInputFields($values = [])
     {
-         foreach ($this->columns as $column) {
-             $columnName = $column[0];
+         foreach ($this->columnNames() as $columnName) {
              $label = $this->labels[$columnName] ?? $columnName;
              echo"		<tr>";
              echo"			<td>{$label}:</td>";
-             echo"			<td><input type=\"text\" name=\"$columnName\"/></td>";
+             echo"			<td><input type=\"text\" name=\"$columnName\" value='$values[$columnName]'/></td>";
              echo"		</tr>";
          }
     }
