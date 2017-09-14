@@ -154,10 +154,11 @@ class Resource
     {
          foreach ($this->columnNames() as $columnName) {
              $label = $this->labels[$columnName] ?? $columnName;
-             echo"		<tr>";
-             echo"			<td>{$label}:</td>";
-             echo"			<td><input type=\"text\" name=\"$columnName\" value='$values[$columnName]'/></td>";
-             echo"		</tr>";
+             $value = $values[$columnName] ?? '';
+             echo"<tr>
+                <td>{$label}:</td>
+                <td><input type=\"text\" name=\"$columnName\" value='{$value}'/></td>
+             </tr>";
          }
     }
 
