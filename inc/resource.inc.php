@@ -29,39 +29,7 @@ class Resource
     {
         $orderBy = $_GET['order'] ?? $this->showInList[0];
         $result = $this->mysqli->query("SELECT * FROM $this->table ORDER BY {$orderBy}");
-
-        echo "
-            <h1>$this->table
-            <input type='button' onclick='document.location.href=\"?action=add$this->singular\"' value='Toevoegen' />
-            </h1>
-
-            <table id='display-list'>";
-
-
-        echo "<tr>";
-        foreach ($this->showInList as $column)
-            echo "<th>
-                {$this->labels[$column]}
-                <a href='?action=$this->lowercase&order=$column'>↓</a>
-            </th>";
-        echo "<th id='actions'>Actie</th>";
-        echo "</tr>";
-
-
-        while($row = $result->fetch_assoc()) {
-            $row = escapeArray($row); // alle slashes weghalen
-            echo"<tr>";
-            foreach ($this->showInList as $column)
-                echo"<td>".$row[$column]."</td>";
-            echo"<td id='actions'>
-                    <a href=\"index.php?action=edit$this->singular&id=".$row[$this->pk]."\">Bewerken</a>
-                    |
-                    <a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=delete$this->singular&id=".$row[$this->pk]."');\">Verwijderen</a>
-                </td>
-            </tr>";
-        }
-
-        echo"</table>";
+        include "templates/show.php";
     }
 
     function displayAdd()
