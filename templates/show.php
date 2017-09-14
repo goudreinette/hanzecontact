@@ -3,9 +3,9 @@
     <input type='button' onclick='document.location.href="?action=add<?= $this->singular ?>"' value='Toevoegen' />
 </h1>
 
-<table id='display-list'>"
+<table id='display-list'>
     <tr>
-        <? foreach ($this->showInList as $column) ?>
+        <? foreach ($this->showInList as $column): ?>
             <th>
                 <?= $this->labels[$column] ?>
                 <a href='?action=$this->lowercase&order=<?= $column ?>'>↓</a>
@@ -15,10 +15,10 @@
     </tr>
 
 
-    <? while($row = $result->fetch_assoc()) ?>
+    <? while($row = $result->fetch_assoc()): ?>
         <? $row = escapeArray($row); ?>
         <tr>
-        <? foreach ($this->showInList as $column) ?>
+        <? foreach ($this->showInList as $column): ?>
             <td><?= $row[$column] ?></td>
         <? endforeach ?>
         <td id='actions'>
@@ -26,7 +26,7 @@
                     Bewerken
                 </a>
                 |
-                <a href=\"javascript:confirmAction('Zeker weten?', 'index.php?action=delete$this->singular&id=<?= $row[$this->pk] ?>">
+                <a href="javascript:confirmAction('Zeker weten?', 'index.php?action=delete$this->singular&id=<?= $row[$this->pk] ?>">
                     Verwijderen
                 </a>
             </td>
