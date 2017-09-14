@@ -121,23 +121,17 @@ class Resource
 
     function update()
     {
-        $columnValues = array_intersect_key($_POST, array_flip($this->columnNames()));
+        $columnValues = $this->getPostColumnValues();
         $sql = call_user_func_array('sprintf', array_merge([
             "UPDATE `$this->table` SET {$this->columnSetString()} WHERE `$this->pk` = %d",
         ], $columnValues, [$_POST[$this->pk]]));
-
-        print_r($sql);
-        exit();
-
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
 
     function delete()
     {
-        $sql = sprintf("DELETE FROM `$this->table`
-                        WHERE `$this->pk` = %d",
-                        $this->mysqli->escape_string($_GET['id']));
+        $sql = "DELETE FROM `$this->table` WHERE `$this->pk` = {$_GET['id']}";
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
@@ -147,6 +141,7 @@ class Resource
         header("location: index.php?action=$this->lowercase"); // terugkeren naar jobs
         exit();
     }
+
 
     /**
      * Views
@@ -201,5 +196,10 @@ class Resource
         }, $this->columnNames());
 
         return implode(',', $withAssigments);
+    }
+
+    function getPostColumnValues()
+    {
+        return array_intersect_key($_POST, array_flip($this->columnNames()));
     }
 }
