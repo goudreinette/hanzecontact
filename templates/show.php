@@ -8,7 +8,7 @@
         <? foreach ($this->showInList as $column): ?>
             <th>
                 <?= $this->labels[$column] ?>
-                <a href='?action=$this->lowercase&order=<?= $column ?>'>↓</a>
+                <a href='?action=<?= $this->lowercase ?>&order=<?= $column ?>'>↓</a>
             </th>
         <? endforeach ?>
         <th id='actions'>Actie</th>
@@ -22,11 +22,11 @@
             <td><?= $row[$column] ?></td>
         <? endforeach ?>
         <td id='actions'>
-                <a href="index.php?action=edit$this->singular&id<?= $row[$this->pk] ?>">
+                <a href="index.php?action=edit<?= $this->singular ?>&id<?= $row[$this->pk] ?>">
                     Bewerken
                 </a>
                 |
-                <a href="javascript:confirmAction('Zeker weten?', 'index.php?action=delete$this->singular&id=<?= $row[$this->pk] ?>">
+                <a href="javascript:confirmAction('Zeker weten?', 'index.php?action=delete<?= $this->singular ?>&id=<?= $row[$this->pk] ?>">
                     Verwijderen
                 </a>
             </td>

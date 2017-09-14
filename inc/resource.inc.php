@@ -44,7 +44,7 @@ class Resource
         $result = $this->mysqli->query($sql);
         if($row = $result->fetch_assoc()) {
             $row = escapeArray($row); // alle slashes weghalen
-            include "templates/edit.php"
+            include "templates/edit.php";
         }
         else {
             die("Geen gegevens gevonden");
