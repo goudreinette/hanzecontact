@@ -34,14 +34,7 @@ class Resource
 
     function displayAdd()
     {
-        echo"
-        <h1>$this->singular toevoegen</h1>
-        <form method=\"post\" action=\"index.php?action=insert$this->singular\">
-             <table>";
-        $this->displayInputFields();
-        $this->displaySubmitButton();
-        echo"</table>
-        </form>";
+        include "templates/add.php";
     }
 
     function displayEdit()
