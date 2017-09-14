@@ -47,8 +47,8 @@ class Resource
 
 
         echo "<tr>";
-        foreach ($this->labels as $column => $label)
-            echo "<th>{$label}</th>";
+        foreach ($this->showInList as $column)
+            echo "<th>{$this->labels[$column]}</th>";
         echo "<th>Actie</th>";
         echo "</tr>";
 
@@ -56,9 +56,8 @@ class Resource
         while($row = $result->fetch_assoc()) {
             $row = escapeArray($row); // alle slashes weghalen
             echo"<tr>";
-            foreach ($this->labels as $column => $label) {
+            foreach ($this->showInList as $column)
                 echo"<td>".$row[$column]."</td>";
-            }
             echo"<td>
                     <a href=\"index.php?action=editjob&id=".$row[$this->pk]."\">Bewerken</a>
                     |
@@ -75,21 +74,12 @@ class Resource
         echo"
             <h1>Baan bewerken</h1>
             <form method=\"post\" action=\"index.php?action=insertjob\">
-             <table> ";
-
-                 foreach ($this->labels as $column => $label) {
-                     echo"		<tr>";
-                     echo"			<td>$label:</td>";
-                     echo"			<td><input type=\"text\" name=\"$column\"/></td>";
-                     echo"		</tr>";
-                 }
-
-        echo"		<tr>";
-        echo"			<td></td>";
-        echo"			<td><input type=\"submit\" value=\"Opslaan\" /></td>";
-        echo"		</tr>";
-
-        echo "
+             <table>
+                {$this->displayInputFields()}
+                <tr>
+                   <td></td>
+                   <td><input type=\"submit\" value=\"Opslaan\" /></td>
+                </tr>
             </table>
         </form>";
     }
@@ -179,6 +169,21 @@ class Resource
     {
         header("location: index.php?action=$this->lowercase"); // terugkeren naar jobs
         exit();
+    }
+
+    /**
+     * Views
+     */
+    function displayInputFields()
+    {
+         foreach ($this->columns as $column) {
+             $columnName = $column[0];
+             $label = $this->labels[$columnName] ?? $columnName;
+             echo"		<tr>";
+             echo"			<td>{$label}:</td>";
+             echo"			<td><input type=\"text\" name=\"$columnName\"/></td>";
+             echo"		</tr>";
+         }
     }
 
 
