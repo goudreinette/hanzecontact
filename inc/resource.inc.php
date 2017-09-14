@@ -44,15 +44,7 @@ class Resource
         $result = $this->mysqli->query($sql);
         if($row = $result->fetch_assoc()) {
             $row = escapeArray($row); // alle slashes weghalen
-
-            echo"<h1>$this->singular bewerken</h1>
-             <form method=\"post\" action=\"index.php?action=update$this->singular\">
-                 <table>";
-                    $this->displayInputFields($row);
-                    $this->displaySubmitButton();
-            echo"</table>
-                 <input type=\"hidden\" name=\"$this->pk\" value=\"".$row[$this->pk]."\" />
-             </form>";
+            include "templates/edit.php"
         }
         else {
             die("Geen gegevens gevonden");
@@ -102,31 +94,6 @@ class Resource
         header("location: index.php?action=$this->lowercase"); // terugkeren naar jobs
         exit();
     }
-
-
-    /**
-     * Views
-     */
-    function displayInputFields($values = [])
-    {
-         foreach ($this->columnNames() as $columnName) {
-             $label = $this->labels[$columnName] ?? $columnName;
-             $value = $values[$columnName] ?? '';
-             echo"<tr>
-                <td>{$label}:</td>
-                <td><input type=\"text\" name=\"$columnName\" value='{$value}'/></td>
-             </tr>";
-         }
-    }
-
-    function displaySubmitButton()
-    {
-        echo "<tr>
-            <td></td>
-            <td><input type=\"submit\" value=\"Opslaan\" /></td>
-        </tr>";
-    }
-
 
     /**
      * Column Helpers
