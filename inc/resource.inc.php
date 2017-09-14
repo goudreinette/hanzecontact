@@ -5,19 +5,20 @@
 class Resource
 {
 
-    function __construct($table, $labels)
+    function __construct($table, $options)
     {
         global $mysqli;
 
-        $this->mysqli    = $mysqli;
+        $this->mysqli     = $mysqli;
 
-        $this->table     = $table;
-        $this->lowercase = strtolower($this->table);
-        $this->singular  = substr($this->lowercase, 0, -1);
+        $this->table      = $table;
+        $this->lowercase  = strtolower($this->table);
+        $this->singular   = substr($this->lowercase, 0, -1);
 
-        $this->labels    = $labels;
-        $this->columns   = $mysqli->query("DESCRIBE $table")->fetch_all();
-        $this->pk        = $this->findPk($this->columns);
+        $this->showInList = $options['showInList'];
+        $this->labels     = $options['labels'];
+        $this->columns    = $mysqli->query("DESCRIBE $table")->fetch_all();
+        $this->pk         = $this->findPk($this->columns);
     }
 
     function findPk($columns)

@@ -16,7 +16,7 @@
      * Resources
      */
     $jobs = new Resource("Jobs", [
-        'list' => ['JobTitle', 'MinSalary', 'MaxSalary'],
+        'showInList' => ['JobTitle', 'MinSalary', 'MaxSalary'],
         'labels' => [
             'JobTitle' => 'Titel',
             'MinSalary' => 'Minimum salaris',
@@ -25,7 +25,7 @@
     ]);
 
     $locations = new Resource("Locations", [
-        'list' => ['StreetAddress', 'City'],
+        'showInList' => ['StreetAddress', 'City'],
         'labels' => [
             'StreetAddress' => 'Adres',
             'City' => 'Stad'
@@ -33,7 +33,7 @@
     ]);
 
     $employees = new Resource("Employees", [
-        'list' => ['FirstName', 'LastName', 'Salary'],
+        'showInList' => ['FirstName', 'LastName', 'Salary'],
         'labels' => [
             'FirstName' => 'Voornaam',
             'LastName' => 'Achternaam',
