@@ -116,9 +116,6 @@ class Resource
              VALUES {$this->columnValuesString()}"
         ], $columnValues));
 
-        print_r($sql);
-        exit();
-
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
