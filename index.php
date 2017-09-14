@@ -13,36 +13,39 @@
     /**
      * Resources
      */
-    $jobs = new Resource("Jobs", [
-        'showInList' => ['JobTitle', 'MinSalary', 'MaxSalary'],
-        'labels' => [
-            'JobTitle' => 'Titel',
-            'MinSalary' => 'Minimum salaris',
-            'MaxSalary' => 'Maximum salaris'
-        ]
-    ]);
+     $resources = [
+         new Resource("Jobs", [
+             'showInList' => ['JobTitle', 'MinSalary', 'MaxSalary'],
+             'labels' => [
+                 'JobTitle' => 'Titel',
+                 'MinSalary' => 'Minimum salaris',
+                 'MaxSalary' => 'Maximum salaris'
+             ]
+         ]),
 
-    $locations = new Resource("Locations", [
-        'showInList' => ['StreetAddress', 'City'],
-        'labels' => [
-            'StreetAddress' => 'Adres',
-            'City' => 'Stad'
-        ]
-    ]);
+         new Resource("Locations", [
+             'showInList' => ['StreetAddress', 'City'],
+             'labels' => [
+                 'StreetAddress' => 'Adres',
+                 'City' => 'Stad'
+             ]
+         ]),
 
-    $employees = new Resource("Employees", [
-        'showInList' => ['FirstName', 'LastName', 'Salary'],
-        'labels' => [
-            'FirstName' => 'Voornaam',
-            'LastName' => 'Achternaam',
-            'Salary' => 'Salaris'
-        ]
-    ]);
+         new Resource("Employees", [
+             'showInList' => ['FirstName', 'LastName', 'Salary'],
+             'labels' => [
+                 'FirstName' => 'Voornaam',
+                 'LastName' => 'Achternaam',
+                 'Salary' => 'Salaris'
+             ]
+         ])
+     ];
+
 
     displayHeader(); // de HTML header tonen
     displayNavigation(); // de menubalk tonen
 
-    dispatch([$jobs, $locations, $employees]);
+    dispatch($resources);
 
     displayFooter(); // de HTML footer tonen
     databaseDisconnect(); // verbinding met de database verbreken
