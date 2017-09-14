@@ -22,7 +22,7 @@
             <td><?= $row[$column] ?></td>
         <? endforeach ?>
         <td id='actions'>
-                <a href="index.php?action=edit<?= $this->singular ?>&id<?= $row[$this->pk] ?>">
+                <a href="index.php?action=edit<?= $this->singular ?>&id=<?= $row[$this->pk] ?>">
                     Bewerken
                 </a>
                 |
