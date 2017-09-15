@@ -63,7 +63,10 @@ class Resource
 
         $columnValues = $this->getPostColumnValues();
         $sql = "INSERT INTO `$this->table` {$this->columnNameString()}
-                VALUES {$this->tupleString($columnValues)}";
+                VALUES {$this->columnValuesString($columnValues)}";
+
+        print_r($sql);
+        exit();
 
         $this->mysqli->query($sql);
         $this->returnToResource();
@@ -74,6 +77,7 @@ class Resource
         $columnValues = $this->getPostColumnValues();
         $sql = "UPDATE `$this->table` SET {$this->columnSetString($columnValues)}
                 WHERE `$this->pk` = {$_POST[$this->pk]}";
+
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
@@ -120,17 +124,18 @@ class Resource
 
     function columnSetString($values)
     {
-        $withAssigments = array_map(function ($columnName) {
+        $withAssigments = array_map(function ($columnName) use ($values) {
             return "$columnName = '{$values[$columnName]}'"; // TODO: insert right here to remove sprintf
         }, $this->columnNames());
 
         return implode(',', $withAssigments);
     }
 
-    function columnValuesString()
+    function columnValuesString($values)
     {
-        $fill = array_fill(0, count($this->columnNames()), "'%s'");
-        return "(" . implode(',', $fill) . ")";
+        return $this->tupleString(array_map(function ($val){
+            return "'$val'";
+        }, $values));
     }
 
     function getPostColumnValues()
