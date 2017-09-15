@@ -60,6 +60,7 @@ class Resource
         $columnValues = $this->getPostColumnValues();
         $sql = "INSERT INTO `$this->table` {$this->columnNameString()}
                 VALUES {$this->columnValuesString($columnValues)}";
+
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
@@ -85,6 +86,7 @@ class Resource
         header("location: index.php?action=$this->lowercase"); // terugkeren naar jobs
         exit();
     }
+
 
     /**
      * Column Helpers
@@ -116,7 +118,7 @@ class Resource
     function columnSetString($values)
     {
         $withAssigments = array_map(function ($columnName) use ($values) {
-            return "$columnName = '{$values[$columnName]}'"; // TODO: insert right here to remove sprintf
+            return "$columnName = '{$values[$columnName]}'";
         }, $this->columnNames());
 
         return implode(',', $withAssigments);

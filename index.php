@@ -6,6 +6,7 @@
     include("inc/database.inc.php"); // Funties om verbinding met de database te maken
 
     include("inc/resource.inc.php"); // Resource
+    include("inc/employees.inc.php"); // Resource
     include("inc/general.inc.php"); // Algemene functies zoals drawHeader en drawFooter
 
     databaseConnect(); // verbinding met de database maken
@@ -31,22 +32,16 @@
              ]
          ]),
 
-         new Resource("Employees", [
-             'showInList' => ['FirstName', 'LastName', 'Salary'],
-             'labels' => [
-                 'FirstName' => 'Voornaam',
-                 'LastName' => 'Achternaam',
-                 'Salary' => 'Salaris'
-             ]
-         ]),
-          new Resource("Departments", [
+         new Employees,
+
+         new Resource("Departments", [
               'showInList' => ['DepartmentName'],
               'labels' => [
                   'DepartmentName' => 'Naam',
                   'ManagerID' => 'Manager ID',
                   'LocationID' => 'Locatie ID'
               ]
-          ]),
+         ]),
      ];
 
 
