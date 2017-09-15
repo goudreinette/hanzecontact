@@ -62,10 +62,8 @@ class Resource
         // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
 
         $columnValues = $this->getPostColumnValues();
-        $sql = call_user_func_array('sprintf', array_merge([
-            "INSERT INTO `$this->table` {$this->columnNameString()}
-             VALUES {$this->columnValuesString()}"
-        ], $columnValues));
+        $sql = "INSERT INTO `$this->table` {$this->columnNameString()}
+                VALUES {$this->tupleString($columnValues)}";
 
         $this->mysqli->query($sql);
         $this->returnToResource();
@@ -74,10 +72,8 @@ class Resource
     function update()
     {
         $columnValues = $this->getPostColumnValues();
-        $sql = call_user_func_array('sprintf', array_merge([
-            "UPDATE `$this->table` SET {$this->columnSetString()}
-             WHERE `$this->pk` = %d",
-        ], $columnValues, [$_POST[$this->pk]]));
+        $sql = "UPDATE `$this->table` SET {$this->columnSetString($columnValues)}
+                WHERE `$this->pk` = {$_POST[$this->pk]}";
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
@@ -114,13 +110,18 @@ class Resource
 
     function columnNameString()
     {
-        return "(" . implode(',', $this->columnNames()) . ")";
+        return $this->tupleString($this->columnNames());
     }
 
-    function columnSetString()
+    function tupleString($array)
+    {
+        return "(" . implode(',', $array) . ")";
+    }
+
+    function columnSetString($values)
     {
         $withAssigments = array_map(function ($columnName) {
-            return "$columnName = '%s'"; // TODO: insert right here to remove sprintf
+            return "$columnName = '{$values[$columnName]}'"; // TODO: insert right here to remove sprintf
         }, $this->columnNames());
 
         return implode(',', $withAssigments);
