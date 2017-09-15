@@ -1,10 +1,10 @@
 <?php
 
-
-
+/**
+ * Represents a database table, it's columns and CRUD actions.
+ */
 class Resource
 {
-
     function __construct($table, $options)
     {
         global $mysqli;
@@ -57,17 +57,9 @@ class Resource
      */
     function insert()
     {
-
-        // Letop we maken gebruik van sprintf. Kijk op php.net voor meer info.
-        // Binnen sprintf staat %s voor een string, %d voor een decimaal (integer) en %f voor een float
-
         $columnValues = $this->getPostColumnValues();
         $sql = "INSERT INTO `$this->table` {$this->columnNameString()}
                 VALUES {$this->columnValuesString($columnValues)}";
-
-        print_r($sql);
-        exit();
-
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
@@ -77,7 +69,6 @@ class Resource
         $columnValues = $this->getPostColumnValues();
         $sql = "UPDATE `$this->table` SET {$this->columnSetString($columnValues)}
                 WHERE `$this->pk` = {$_POST[$this->pk]}";
-
         $this->mysqli->query($sql);
         $this->returnToResource();
     }
