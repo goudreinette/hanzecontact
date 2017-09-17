@@ -1,15 +1,8 @@
-<h1><?= $this->singular ?> bewerken</h1>
-<form method="post" action="index.php?action=update<?= $this->singular ?>">
+<h1>Medewerker bewerken</h1>
+<form method="post" action="index.php?action=updateemployee">
      <table>
-        <? foreach (array_diff($this->columnNames(), ['Picture']) as $columnName):
-            $label = $this->labels[$columnName] ?? $columnName;
-            $value = $row[$columnName] ?? '';
-        ?>
-            <tr>
-               <td><?= $label ?>:</td>
-               <td><input type="text" name="<?= $columnName ?>" value='<?= $value ?>'/></td>
-            </tr>
-        <? endforeach ?>
+        <? include "templates/input_fields.php" ?>
+         <img src="pictures/<?=$row['Picture']?>" alt="">
          <input type="file" name="Picture" value='' />
         <? include "templates/submit_button.php" ?>
      </table>

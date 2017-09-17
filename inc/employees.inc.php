@@ -36,8 +36,16 @@ class Employees extends Resource
 
     function displayEdit()
     {
-        $columnNames = $this->columnNames();
-        include "templates/edit_employee.php";
+        $sql = "SELECT * FROM $this->table WHERE `$this->pk` = {$_GET['id']}";
+        $result = $this->mysqli->query($sql);
+        if($row = $result->fetch_assoc()) {
+            $row = escapeArray($row); // alle slashes weghalen
+            $columnNames = $this->columnNames();
+            include "templates/edit_employee.php";
+        }
+        else {
+            die("Geen gegevens gevonden");
+        }
     }
 
     function insert()
@@ -51,7 +59,7 @@ class Employees extends Resource
 
         $this->mysqli->query($sql);
         $this->setImage($this->mysqli->insert_id);
-        // $this->returnToResource();
+        $this->returnToResource();
     }
 
     function update()
@@ -68,7 +76,8 @@ class Employees extends Resource
     {
         $sql = "SELECT * FROM $this->table WHERE `$this->pk` = $id";
         $result = $this->mysqli->query($sql)->fetch_assoc();
-        $path = $result['Picture'];
+        $file_name = $result['Picture'];
+        unlink("pictures/$file_name");
     }
 
     function setImage($id)
@@ -78,7 +87,8 @@ class Employees extends Resource
 
         move_uploaded_file($file_tmp, "pictures/".$file_name);
 
-        $sql = "UPDATE $this->table SET Picture = $file_name WHERE `$this->pk` = $id";
+        $sql = "UPDATE $this->table SET Picture = '$file_name' WHERE `$this->pk` = $id";
+        $this->mysqli->query($sql);
     }
 
     function columnNames()

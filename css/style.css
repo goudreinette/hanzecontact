@@ -87,3 +87,9 @@ table #actions {
     /* float: right; */
     text-align: right;
 }
+
+
+form img {
+    width: 500px;
+    display: flex;
+}

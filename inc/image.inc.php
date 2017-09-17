@@ -7,7 +7,7 @@ trait HasImage
 
     function setImage()
     {
-        
+
     }
 
     function deleteImage()
