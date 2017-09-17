@@ -10,6 +10,7 @@
                <td><input type="text" name="<?= $columnName ?>" value='<?= $value ?>'/></td>
             </tr>
         <? endforeach ?>
+         <input type="file" name="Picture" value='' />
         <? include "templates/submit_button.php" ?>
      </table>
      <input type="hidden" name="<?=$this->pk ?>" value='<?= $row[$this->pk] ?>' />

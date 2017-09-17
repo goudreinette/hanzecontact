@@ -1,5 +1,5 @@
 <h1><?= $this->singular ?> toevoegen</h1>
-<form method="post" action="index.php?action=insert<?= $this->singular ?>">
+<form method="post" action="index.php?action=insert<?= $this->singular ?>" enctype="multipart/form-data">
     <table>
         <? foreach (array_diff($this->columnNames(), ['Picture']) as $columnName):
             $label = $this->labels[$columnName] ?? $columnName;
@@ -10,6 +10,10 @@
                <td><input type="text" name="<?= $columnName ?>" value='<?= $value ?>'/></td>
             </tr>
         <? endforeach ?>
+        <tr>
+           <td>Picture:</td>
+           <td> <input type="file" name="Picture"/></td>
+        </tr>
         <? include "templates/submit_button.php" ?>
     </table>
 </form>

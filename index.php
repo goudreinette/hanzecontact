@@ -5,6 +5,7 @@
     include("conf/config.conf.php"); // De configuratie van het systeem
     include("inc/database.inc.php"); // Funties om verbinding met de database te maken
 
+    include("inc/aresource.inc.php"); // Resource
     include("inc/resource.inc.php"); // Resource
     include("inc/employees.inc.php"); // Resource
     include("inc/general.inc.php"); // Algemene functies zoals drawHeader en drawFooter
