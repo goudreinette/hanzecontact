@@ -67,11 +67,6 @@ class Employees extends Resource
 
     }
 
-    function delete()
-    {
-
-    }
-
     function deleteImage($id)
     {
         $sql = "SELECT * FROM $this->table WHERE `$this->pk` = $id";
