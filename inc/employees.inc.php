@@ -3,11 +3,12 @@
 /**
  * A resource with a special 'image' field.
  */
-class Employees extends AResource
+class Employees extends Resource
 {
     public $table = 'Employees';
     public $lowercase = 'employees';
     public $singular = 'employee';
+    public $pk = 'EmployeeID';
     public $showInList = ['FirstName', 'LastName'];
     public $labels = [
         'FirstName' => 'Voornaam',
@@ -29,23 +30,27 @@ class Employees extends AResource
 
     function displayAdd()
     {
+        $columnNames = $this->columnNames();
         include "templates/add_employee.php";
     }
 
     function displayEdit()
     {
+        $columnNames = $this->columnNames();
         include "templates/edit_employee.php";
     }
 
     function insert()
     {
         $_POST['Picture'] = $_FILES['Picture']['name'];
+
+
         $columnValues = $this->getPostColumnValues();
         $sql = "INSERT INTO `$this->table` {$this->columnNameString()}
                 VALUES {$this->columnValuesString($columnValues)}";
 
         $this->mysqli->query($sql);
-        $this->setImage();
+        $this->setImage($this->mysqli->insert_id);
         // $this->returnToResource();
     }
 
@@ -59,22 +64,36 @@ class Employees extends AResource
 
     }
 
-    function deleteImage()
+    function deleteImage($id)
     {
-        $sql = "SELECT * FROM $this->table WHERE `$this->pk` = {$_POST[$this->pk]}";
+        $sql = "SELECT * FROM $this->table WHERE `$this->pk` = $id";
         $result = $this->mysqli->query($sql)->fetch_assoc();
         $path = $result['Picture'];
-        unlink("pictures/$path");
     }
 
-    function setImage()
+    function setImage($id)
     {
-        $this->deleteImage();
-        $file_name = $_FILE['Picture']['name'];
-        $file_tmp =  $_FILE['Picture']['tmp_name'];
+        $file_name = $_FILES['Picture']['name'];
+        $file_tmp =  $_FILES['Picture']['tmp_name'];
 
-        move_uploaded_file($file_tmp,"pictures/".$file_name);
+        move_uploaded_file($file_tmp, "pictures/".$file_name);
 
-        $sql = "UPDATE $this->table SET Picture = $file_name WHERE `$this->pk` = {$_POST[$this->pk]}";
+        $sql = "UPDATE $this->table SET Picture = $file_name WHERE `$this->pk` = $id";
+    }
+
+    function columnNames()
+    {
+        return [
+            'FirstName',
+            'LastName',
+            'Email',
+            'PhoneNumber',
+            'HireDate',
+            'JobID',
+            'Salary',
+            'CommissionPCT',
+            'ManagerID',
+            'DepartmentID'
+        ];
     }
 }
