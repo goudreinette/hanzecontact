@@ -34,6 +34,7 @@ class Resource extends AResource
 
     function displayAdd()
     {
+        $columnNames = $this->columnNames();
         include "templates/add.php";
     }
 
@@ -44,6 +45,7 @@ class Resource extends AResource
         $result = $this->mysqli->query($sql);
         if($row = $result->fetch_assoc()) {
             $row = escapeArray($row); // alle slashes weghalen
+            $columnNames = $this->columnNames();
             include "templates/edit.php";
         }
         else {

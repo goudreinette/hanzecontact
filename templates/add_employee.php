@@ -1,7 +1,7 @@
-<h1><?= $this->singular ?> toevoegen</h1>
-<form method="post" action="index.php?action=insert<?= $this->singular ?>" enctype="multipart/form-data">
+<h1>Medewerker toevoegen</h1>
+<form method="post" action="index.php?action=insertemployee" enctype="multipart/form-data">
     <table>
-        <? foreach (array_diff($this->columnNames(), ['Picture']) as $columnName):
+        <? foreach (array_diff($columns) as $columnName):
             $label = $this->labels[$columnName] ?? $columnName;
             $value = $row[$columnName] ?? '';
         ?>
