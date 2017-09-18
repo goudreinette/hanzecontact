@@ -13,6 +13,7 @@
 
         global $config;
 
+        echo "<!doctype html>";
         echo "<html>";
         echo "	<head>";
         echo "		<title>".$config['pagetitle']."</title>";

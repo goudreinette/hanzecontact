@@ -11,7 +11,7 @@
                 <a href='?action=<?= $this->lowercase ?>&order=<?= $column ?>'>↓</a>
             </th>
         <? endforeach ?>
-        <th id='actions'>Actie</th>
+        <th class='actions'>Actie</th>
     </tr>
 
 
@@ -21,7 +21,7 @@
         <? foreach ($this->showInList as $column): ?>
             <td><?= $row[$column] ?></td>
         <? endforeach ?>
-        <td id='actions'>
+        <td class='actions'>
                 <a href="index.php?action=edit<?= $this->singular ?>&id=<?= $row[$this->pk] ?>">
                     Bewerken
                 </a>
