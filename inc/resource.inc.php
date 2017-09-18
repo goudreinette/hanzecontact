@@ -64,6 +64,7 @@ class Resource
                 VALUES {$this->columnValuesString($columnValues)}";
 
         $this->mysqli->query($sql);
+        $this->afterInsert($this->mysqli->insert_id);
         $this->returnToResource();
     }
 
@@ -73,6 +74,7 @@ class Resource
         $sql = "UPDATE `$this->table` SET {$this->columnSetString($columnValues)}
                 WHERE `$this->pk` = {$_POST[$this->pk]}";
         $this->mysqli->query($sql);
+        $this->afterUpdate($_POST[$this->pk]);
         $this->returnToResource();
     }
 
@@ -88,6 +90,12 @@ class Resource
         header("location: index.php?action=$this->lowercase"); // terugkeren naar jobs
         exit();
     }
+
+    /**
+     * Hooks
+     */
+    function afterInsert($id) {}
+    function afterUpdate($id) {}
 
 
     /**

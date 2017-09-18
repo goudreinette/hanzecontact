@@ -1,5 +1,5 @@
 <h1>Medewerker bewerken</h1>
-<form method="post" action="index.php?action=updateemployee">
+<form method="post" action="index.php?action=updateemployee"  enctype="multipart/form-data">
      <table>
         <? include "templates/input_fields.php" ?>
          <img src="pictures/<?=$row['Picture']?>" alt="">

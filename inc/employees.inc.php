@@ -21,13 +21,6 @@ class Employees extends Resource
         $this->mysqli = $mysqli;
     }
 
-    function display()
-    {
-        $orderBy = $_GET['order'] ?? $this->showInList[0];
-        $result = $this->mysqli->query("SELECT * FROM $this->table ORDER BY {$orderBy}");
-        include "templates/show.php";
-    }
-
     function displayAdd()
     {
         $columnNames = $this->columnNames();
@@ -48,23 +41,14 @@ class Employees extends Resource
         }
     }
 
-    function insert()
+    function afterInsert($id)
     {
-        $_POST['Picture'] = $_FILES['Picture']['name'];
-
-
-        $columnValues = $this->getPostColumnValues();
-        $sql = "INSERT INTO `$this->table` {$this->columnNameString()}
-                VALUES {$this->columnValuesString($columnValues)}";
-
-        $this->mysqli->query($sql);
-        $this->setImage($this->mysqli->insert_id);
-        $this->returnToResource();
+        $this->setImage($id);
     }
 
-    function update()
+    function afterUpdate($id)
     {
-
+        $this->setImage($id);
     }
 
     function deleteImage($id)
