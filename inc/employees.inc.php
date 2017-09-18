@@ -51,14 +51,6 @@ class Employees extends Resource
         $this->setImage($id);
     }
 
-    function deleteImage($id)
-    {
-        $sql = "SELECT * FROM $this->table WHERE `$this->pk` = $id";
-        $result = $this->mysqli->query($sql)->fetch_assoc();
-        $file_name = $result['Picture'];
-        unlink("pictures/$file_name");
-    }
-
     function setImage($id)
     {
         $file_name = $_FILES['Picture']['name'];

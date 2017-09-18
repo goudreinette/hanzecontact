@@ -1,6 +1,6 @@
 <div id="navigation">
     <div>
-        <img id='logo' src='./pictures/logo.jpeg'/>
+        <img id='logo' src='./pictures/logo.jpeg' alt="logo"/>
         <a href="index.php?action=home">
             Home
         </a>
