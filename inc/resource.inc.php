@@ -3,7 +3,7 @@
 /**
  * Represents a database table, it's columns and CRUD actions.
  */
-class Resource extends AResource
+class Resource
 {
     function __construct($table, $options)
     {
