@@ -1,4 +1,4 @@
-<? foreach ($columnNames as $columnName):
+<? foreach ($this->columnNames() as $columnName):
     $label = $this->labels[$columnName] ?? $columnName;
     $value = $row[$columnName] ?? '';
 ?>

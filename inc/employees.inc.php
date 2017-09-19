@@ -11,7 +11,7 @@ class Employees extends Resource
     public $pk = 'EmployeeID';
     public $showInList = ['FirstName', 'LastName'];
     public $labels = [
-        'Employees' => 'Mederwerker',
+        'Employees' => 'Medewerkers',
         'employee' => 'Medewerker',
         'FirstName' => 'Voornaam',
         'LastName' => 'Achternaam'
@@ -25,7 +25,6 @@ class Employees extends Resource
 
     function displayAdd()
     {
-        $columnNames = $this->columnNames();
         include "templates/add_employee.php";
     }
 
@@ -35,7 +34,6 @@ class Employees extends Resource
         $result = $this->mysqli->query($sql);
         if($row = $result->fetch_assoc()) {
             $row = escapeArray($row); // alle slashes weghalen
-            $columnNames = $this->columnNames();
             include "templates/edit_employee.php";
         }
         else {
