@@ -88,6 +88,10 @@
 
     function dispatch($resources)
     {
+        if (in_array(getCurrentAction(), ['home', ''])) {
+            displayHome();
+        }
+
         foreach ($resources as $resource) {
             $lowercase = $resource->lowercase;
             $singular = $resource->singular;
