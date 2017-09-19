@@ -1,5 +1,5 @@
 <h1>
-    <?= $this->table ?>
+    <?= $this->labels[$this->table] ?? $this->table ?>
     <input type='button' onclick='document.location.href="?action=add<?= $this->singular ?>"' value='Toevoegen' />
 </h1>
 

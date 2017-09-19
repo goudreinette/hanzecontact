@@ -1,4 +1,4 @@
-<h1><?= $this->singular ?> toevoegen</h1>
+<h1><?= $this->labels[$this->singular] ?? $this->singular  ?> toevoegen</h1>
 <form method="post" action="index.php?action=insert<?= $this->singular ?>">
     <table>
         <? include "templates/input_fields.php" ?>

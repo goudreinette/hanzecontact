@@ -11,6 +11,8 @@ class Employees extends Resource
     public $pk = 'EmployeeID';
     public $showInList = ['FirstName', 'LastName'];
     public $labels = [
+        'Employees' => 'Mederwerker',
+        'employee' => 'Medewerker',
         'FirstName' => 'Voornaam',
         'LastName' => 'Achternaam'
     ];

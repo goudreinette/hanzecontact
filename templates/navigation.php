@@ -9,7 +9,7 @@
     <? foreach ($resources as $resource): ?>
         <div>
             <a href="index.php?action=<?=$resource->lowercase?>">
-                <?=$resource->table?>
+                <?=$resource->labels[$resource->table] ?? $resource->table?>
             </a>
         </div>
     <? endforeach; ?>

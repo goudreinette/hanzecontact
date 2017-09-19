@@ -18,6 +18,8 @@
          new Resource("Jobs", [
              'showInList' => ['JobTitle', 'MinSalary', 'MaxSalary'],
              'labels' => [
+                 'Jobs' => 'Banen',
+                 'job' => 'Baan',
                  'JobTitle' => 'Titel',
                  'MinSalary' => 'Minimum salaris',
                  'MaxSalary' => 'Maximum salaris'
@@ -27,6 +29,8 @@
          new Resource("Locations", [
              'showInList' => ['StreetAddress', 'City'],
              'labels' => [
+                 'Locations' => 'Locaties',
+                 'location' => 'Locatie',
                  'StreetAddress' => 'Adres',
                  'City' => 'Stad'
              ]
@@ -37,6 +41,8 @@
          new Resource("Departments", [
               'showInList' => ['DepartmentName'],
               'labels' => [
+                  'Departments' => 'Afdelingen',
+                  'department' => 'Afdeling',
                   'DepartmentName' => 'Naam',
                   'ManagerID' => 'Manager ID',
                   'LocationID' => 'Locatie ID'
